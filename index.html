@@ -35,7 +35,7 @@
 
 		<script src="js/three.min.js"></script>
 		<script src="js/Mirror.js"></script>
-		<script src="js/controls/OrbitControls.js"></script>
+		<script src="js/OrbitControls.js"></script>
 
 		<script>
 
@@ -169,6 +169,21 @@
 				var blueLight = new THREE.PointLight( 0x7f7fff, 0.25, 1000 );
 				blueLight.position.set( 0, 50, 550 );
 				scene.add( blueLight );
+
+				//images
+
+				var posterTexture1 = new THREE.ImageUtils.loadTexture( 'img/100.jpg' );
+
+				var posterMaterial1 = new THREE.MeshBasicMaterial( { map: posterTexture1, side:THREE.DoubleSide } );
+
+				var geometryPoster = new THREE.PlaneGeometry( 4, 6 );
+				var poster1 = new THREE.Mesh( geometryPoster, posterMaterial1 );
+				domesticGroup.add(poster1);
+
+				poster1.rotation.y = 29.8;
+				poster1.position.y = 12;
+				poster1.position.x = 12.2;
+				poster1.position.z = -42.5;
 
 			}
 
