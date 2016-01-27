@@ -5,33 +5,91 @@
 		<title>mirror-box</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				color: #888888;
-				font-family:Monospace;
-				font-size:13px;
-
-				background-color: #000;
-				margin: 0px;
-				overflow: hidden;
-			}
-
-			#info {
-				position: absolute;
-				top: 0px;
-				width: 200px;
-				left: calc(50% - 100px);
-				text-align: center;
-			}
-
-			a {
-				color: #00f;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="css/main.css">
 	</head>
 	<body>
 
-		<div id="container"></div>
+		<div class="container">
+
+			<div class="text-info">
+				<h1>source</h1>
+				<h1>RGB pixel value > 100</h1>
+				<h1>RGB pixel value > 150</h1>
+				<h1>RGB pixel value > 200</h1>
+			</div>
+
+			<div class="img-container">
+				<div class="img-set">
+					<img src="img/original/1.jpg">
+					<img src="img/100/1.jpg">
+					<img src="img/150/1.jpg">
+					<img src="img/200/1.jpg">
+				</div>
+
+				<div class="img-set">
+					<img src="img/original/2.jpg">
+					<img src="img/100/2.jpg">
+					<img src="img/150/2.jpg">
+					<img src="img/200/2.jpg">
+				</div>
+
+				<div class="img-set">
+					<img src="img/original/3.jpg">
+					<img src="img/100/3.jpg">
+					<img src="img/150/3.jpg">
+					<img src="img/200/3.jpg">
+				</div>
+
+				<div class="img-set">
+					<img src="img/original/4.jpg">
+					<img src="img/100/4.jpg">
+					<img src="img/150/4.jpg">
+					<img src="img/200/4.jpg">
+				</div>
+
+				<div class="img-set">
+					<img src="img/original/5.jpg">
+					<img src="img/100/5.jpg">
+					<img src="img/150/5.jpg">
+					<img src="img/200/5.jpg">
+				</div>
+
+				<div class="img-set">
+					<img src="img/original/6.jpg">
+					<img src="img/100/6.jpg">
+					<img src="img/150/6.jpg">
+					<img src="img/200/6.jpg">
+				</div>
+
+				<div class="img-set">
+					<img src="img/original/7.jpg">
+					<img src="img/100/7.jpg">
+					<img src="img/150/7.jpg">
+					<img src="img/200/7.jpg">
+				</div>
+
+				<div class="img-set">
+					<img src="img/original/8.jpg">
+					<img src="img/100/8.jpg">
+					<img src="img/150/8.jpg">
+					<img src="img/200/8.jpg">
+				</div>
+
+				<div class="img-set">
+					<img src="img/original/9.jpg">
+					<img src="img/100/9.jpg">
+					<img src="img/150/9.jpg">
+					<img src="img/200/9.jpg">
+				</div>
+
+				<img id="comp" src="img/comps/100.jpg">
+				<img id="comp" src="img/comps/150.jpg">
+				<img id="comp" src="img/comps/200.jpg">
+
+			</div>
+
+			<div id="three-container"></div>
+		</div>
 
 		<script src="js/three.min.js"></script>
 		<script src="js/Mirror.js"></script>
@@ -40,8 +98,8 @@
 		<script>
 
 			// scene size
-			var WIDTH = window.innerWidth;
-			var HEIGHT = window.innerHeight;
+			var WIDTH = window.innerWidth * 0.7;
+			var HEIGHT = window.innerHeight * 0.9;
 
 			// camera
 			var VIEW_ANGLE = 45;
@@ -59,7 +117,7 @@
 			function init() {
 
 				// renderer
-				renderer = new THREE.WebGLRenderer();
+				renderer = new THREE.WebGLRenderer({alpha:true});
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( WIDTH, HEIGHT );
 
@@ -68,7 +126,7 @@
 
 				// camera
 				camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
-				camera.position.set( 0, 75, 160 );
+				camera.position.set( 0,95, 190 );
 
 				cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
 				cameraControls.target.set( 0, 40, 0);
@@ -76,7 +134,7 @@
 				cameraControls.minDistance = 10;
 				cameraControls.update();
 
-				var container = document.getElementById( 'container' );
+				var container = document.getElementById( 'three-container' );
 				container.appendChild( renderer.domElement );
 
 			}
@@ -151,7 +209,7 @@
 
 				//images
 
-				var posterTexture1 = new THREE.ImageUtils.loadTexture( 'img/100.jpg' );
+				var posterTexture1 = new THREE.ImageUtils.loadTexture( 'img/comps/100.jpg' );
 
 				var posterMaterial1 = new THREE.MeshBasicMaterial( { map: posterTexture1, side:THREE.DoubleSide } );
 
@@ -163,7 +221,7 @@
 				poster1.position.y = 50;
 				poster1.rotateY( - Math.PI / 2 );
 
-				var posterTexture2 = new THREE.ImageUtils.loadTexture( 'img/150.jpg' );
+				var posterTexture2 = new THREE.ImageUtils.loadTexture( 'img/comps/150.jpg' );
 
 				var posterMaterial2 = new THREE.MeshBasicMaterial( { map: posterTexture2, side:THREE.DoubleSide } );
 
@@ -174,7 +232,7 @@
 				poster2.position.y = 50;
 				poster2.rotateY(Math.PI / 2 );
 
-				var posterTexture3 = new THREE.ImageUtils.loadTexture( 'img/200.jpg' );
+				var posterTexture3 = new THREE.ImageUtils.loadTexture( 'img/comps/200.jpg' );
 
 				var posterMaterial3 = new THREE.MeshBasicMaterial( { map: posterTexture3, side:THREE.DoubleSide } );
 
