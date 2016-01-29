@@ -222,7 +222,7 @@
 
 				var posterTexture1 = new THREE.ImageUtils.loadTexture( 'img/comps/100.jpg' );
 
-				var posterMaterial1 = new THREE.MeshBasicMaterial( { map: posterTexture1, side:THREE.DoubleSide } );
+				var posterMaterial1 = new THREE.MeshBasicMaterial( { map: posterTexture1 } );
 
 				var geometryPoster = new THREE.PlaneGeometry( 60, 40 );
 				var poster1 = new THREE.Mesh( geometryPoster, posterMaterial1 );
@@ -234,7 +234,7 @@
 
 				var posterTexture2 = new THREE.ImageUtils.loadTexture( 'img/comps/150.jpg' );
 
-				var posterMaterial2 = new THREE.MeshBasicMaterial( { map: posterTexture2, side:THREE.DoubleSide } );
+				var posterMaterial2 = new THREE.MeshBasicMaterial( { map: posterTexture2 } );
 
 				var poster2 = new THREE.Mesh( geometryPoster, posterMaterial2 );
 				scene.add(poster2);
@@ -245,13 +245,24 @@
 
 				var posterTexture3 = new THREE.ImageUtils.loadTexture( 'img/comps/200.jpg' );
 
-				var posterMaterial3 = new THREE.MeshBasicMaterial( { map: posterTexture3, side:THREE.DoubleSide } );
+				var posterMaterial3 = new THREE.MeshBasicMaterial( { map: posterTexture3 } );
 
 				var poster3 = new THREE.Mesh( geometryPoster, posterMaterial3 );
 				scene.add(poster3);
 
 				poster3.position.z = -49;
 				poster3.position.y = 50;
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = (window.innerWidth * 0.7)/ (window.innerHeight * 0.9);
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth * 0.7, window.innerHeight * 0.9 );
 
 			}
 
